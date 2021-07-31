@@ -2,8 +2,7 @@ import 'dart:io';
 
 void main(List<String> args) {
   if (args.isEmpty) exit(1);
-
-  final env = Platform.environment;
+  
   final relativePath = '${args[0]}';
   var ext = 'dart';
 
