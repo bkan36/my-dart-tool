@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'utils/exports_utils.dart';
 
 void main(List<String> args) {
   if (args.isEmpty) exit(1);
@@ -23,8 +24,4 @@ class $className {
 }
 ''');
   exit(0);
-}
-
-extension CamelCase on String {
-  String toCamelCase() => this[0].toUpperCase() + substring(1);
 }

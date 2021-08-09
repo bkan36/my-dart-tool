@@ -1,4 +1,6 @@
-String requestFile(str) {
+import '../utils/exports_utils.dart';
+
+String requestFile(String str) {
   final name = str.toCamelCase();
   return '''
 type ${name}ReqDTO = <toFill>;
@@ -7,7 +9,7 @@ export default ${name}ReqDTO;
 ''';
 }
 
-String responseFile(str) {
+String responseFile(String str) {
   final name = str.toCamelCase();
   return '''
 type ${name}ResDTO = Result<entity, entityInvalidReq>;
@@ -16,7 +18,7 @@ export default ${name}ResDTO;
 ''';
 }
 
-String useCaseFile(str) {
+String useCaseFile(String str) {
   final name = str.toCamelCase();
   return '''
 import { Result, UseCase } from "src/core/definition/index";
@@ -45,10 +47,6 @@ export { default as ${name}ResDTO } from "./$str.response-dto";
 ''';
 }
 
-extension CamelCase on String {
-  String toCamelCase() => this[0].toUpperCase() + substring(1);
-}
-
 const filesMap = {
   'request-dto': requestFile,
   'response-dto': responseFile,
@@ -56,9 +54,4 @@ const filesMap = {
   'index': index
 };
 
-const suffixFileName = [
-  'request-dto',
-  'response-dto',
-  'use-case',
-  'index'
-];
+const suffixFileName = ['request-dto', 'response-dto', 'use-case', 'index'];
