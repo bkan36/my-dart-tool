@@ -20,11 +20,12 @@ singleton_builder:
 use_case_builder
 
    -> take use case name (follow camelCase style) at first argument
-   -> and optionally the extension at second (default .ts)
+   -> entity name (optional)
+   -> the extension at third argument (optional default ".ts")
 
    - create 1 folder with 4 files prefilled
-      * useCaseName.request*dto.ext
-      * useCaseName.response*dto.ext
-      * useCaseName.use*case.ext
+      * useCaseName.request-dto.ext
+      * useCaseName.response-dto.ext
+      * useCaseName.use-case.ext
       * index.ext (exports)
 
