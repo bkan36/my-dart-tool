@@ -1,3 +1,3 @@
-extension CamelCase on String {
-  String toCamelCase() => this[0].toUpperCase() + substring(1);
+extension PascalCase on String {
+  String toPascalCase() => this[0].toUpperCase() + substring(1);
 }

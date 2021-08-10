@@ -11,7 +11,7 @@ void main(List<String> args) {
 
   final file = '$fileName.$ext';
 
-  var className = fileName.toCamelCase();
+  var className = fileName.toPascalCase();
 
   File(file).createSync();
 

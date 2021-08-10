@@ -1,7 +1,8 @@
 import '../utils/exports_utils.dart';
 
 String requestFile(String str) {
-  final name = str.toCamelCase();
+  final name = str.toPascalCase();
+
   return '''
 type ${name}ReqDTO = <toFill>;
 
@@ -9,36 +10,41 @@ export default ${name}ReqDTO;
 ''';
 }
 
-String responseFile(String str) {
-  final name = str.toCamelCase();
+String responseFile(String str, String entity) {
+  final name = str.toPascalCase();
+  final entityCC = entity.toPascalCase();
+
   return '''
-type ${name}ResDTO = Result<entity, entityInvalidReq>;
+type ${name}ResDTO = Result<$entityCC, ${entityCC}InvalidReq>;
 
 export default ${name}ResDTO;
 ''';
 }
 
-String useCaseFile(String str) {
-  final name = str.toCamelCase();
+String useCaseFile(String str, String entity) {
+  final name = str.toPascalCase();
+  final entityLC = entity.toLowerCase();
+  final entityCC = entity.toPascalCase();
+
   return '''
 import { Result, UseCase } from "src/core/definition/index";
 import ${name}ResDTO from "./$str.response-dto";
 
-export default class ${name}UC implements UseCase<entity, ${name}ResDTO> {
+export default class ${name}UC implements UseCase<${entityCC}, ${name}ResDTO> {
 
-    constructor(private entityRG: entityRepositoryGateway) { }
+    constructor(private ${entityLC}RG: ${entityLC}RepositoryGateway) { }
 
-    async execute(req: entity): Promise<${name}ResDTO> {
-        const result = await this.entityRG...;
+    async execute(req: ${entityCC}): Promise<${name}ResDTO> {
+        const result = await this.${entityLC}RG...;
 
-        return Result.ok<entity>(result);
+        return Result.ok<$entityCC>(result);
     }
 }
 ''';
 }
 
 String index(String str) {
-  final name = str.toCamelCase();
+  final name = str.toPascalCase();
 
   return '''
 export { default as ${name}UC } from "./$str.use-case";
@@ -47,7 +53,7 @@ export { default as ${name}ResDTO } from "./$str.response-dto";
 ''';
 }
 
-const filesMap = {
+const filesNameMap = {
   'request-dto': requestFile,
   'response-dto': responseFile,
   'use-case': useCaseFile,

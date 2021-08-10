@@ -24,8 +24,8 @@ void main(List<String> args) {
 
     File(pathFile).createSync();
 
-    nameDir.split('_').forEach((n) => className += n.toCamelCase());
-    className += fn.substring(1).toCamelCase();
+    nameDir.split('_').forEach((n) => className += n.toPascalCase());
+    className += fn.substring(1).toPascalCase();
 
     if (fn != '_view') {
       File(pathFile).writeAsStringSync('''
