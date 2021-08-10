@@ -1,6 +1,6 @@
 import '../utils/exports_utils.dart';
 
-String requestFile(String str) {
+String requestFile(String str, String? entity) {
   final name = str.toPascalCase();
 
   return '''
@@ -30,11 +30,11 @@ String useCaseFile(String str, String entity) {
 import { Result, UseCase } from "src/core/definition/index";
 import ${name}ResDTO from "./$str.response-dto";
 
-export default class ${name}UC implements UseCase<${entityCC}, ${name}ResDTO> {
+export default class ${name}UC implements UseCase<$entityCC, ${name}ResDTO> {
 
     constructor(private ${entityLC}RG: ${entityLC}RepositoryGateway) { }
 
-    async execute(req: ${entityCC}): Promise<${name}ResDTO> {
+    async execute(req: $entityCC): Promise<${name}ResDTO> {
         const result = await this.${entityLC}RG...;
 
         return Result.ok<$entityCC>(result);
@@ -43,7 +43,7 @@ export default class ${name}UC implements UseCase<${entityCC}, ${name}ResDTO> {
 ''';
 }
 
-String index(String str) {
+String index(String str, String? entity) {
   final name = str.toPascalCase();
 
   return '''
