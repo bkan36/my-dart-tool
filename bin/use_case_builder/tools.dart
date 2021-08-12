@@ -32,7 +32,7 @@ import ${name}ResDTO from "./$str.response-dto";
 
 export default class ${name}UC implements UseCase<$entityCC, ${name}ResDTO> {
 
-    constructor(private ${entityLC}RG: ${entityLC}RepositoryGateway) { }
+    constructor(private ${entityLC}RG: ${entityCC}Gateway) { }
 
     async execute(req: $entityCC): Promise<${name}ResDTO> {
         const result = await this.${entityLC}RG...;
