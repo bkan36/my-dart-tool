@@ -17,7 +17,7 @@ void buildUseCaseFiles(String folderName, String ext, String entityName) {
 void main(List<String> args) {
   if (args.isEmpty) exit(1);
   var ext = 'ts';
-  var entityName = 'entity';
+  var entityName = '';
 
   final name = args[0];
 

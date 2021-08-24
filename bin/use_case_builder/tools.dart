@@ -1,10 +1,17 @@
 import '../utils/exports_utils.dart';
 
-String requestFile(String str, String? entity) {
+String requestFile(String str, String entity) {
   final name = str.toPascalCase();
+  final imports = entity.isEmpty ? '' :
+'''
+import { ${entity.toPascalCase()} } from "src/core/entities";
+
+''';
 
   return '''
-type ${name}ReqDTO = <toFill>;
+$imports
+
+type ${name}ReqDTO = { abc: };
 
 export default ${name}ReqDTO;
 ''';
@@ -12,10 +19,14 @@ export default ${name}ReqDTO;
 
 String responseFile(String str, String entity) {
   final name = str.toPascalCase();
-  final entityCC = entity.toPascalCase();
+  final entityLC = entity.toLowerCase();
+  final entityPC = entity.toPascalCase();
 
   return '''
-type ${name}ResDTO = Result<$entityCC, ${entityCC}InvalidReq>;
+import { Result } from "src/core/definition";
+import ${entityPC}InvalidReq from "../error/$entityLC.invalid-request";
+
+type ${name}ResDTO = Result<$entityPC, ${entityPC}InvalidReq>;
 
 export default ${name}ResDTO;
 ''';
@@ -24,20 +35,22 @@ export default ${name}ResDTO;
 String useCaseFile(String str, String entity) {
   final name = str.toPascalCase();
   final entityLC = entity.toLowerCase();
-  final entityCC = entity.toPascalCase();
+  final entityPC = entity.toPascalCase();
 
   return '''
 import { Result, UseCase } from "src/core/definition/index";
+import ${entityPC}Gateway from "src/core/gateway/$entityLC.gateway";
+import ${entityPC}InvalidReq from "../error/$entityLC.invalid-request";
 import ${name}ResDTO from "./$str.response-dto";
 
-export default class ${name}UC implements UseCase<$entityCC, ${name}ResDTO> {
+export default class ${name}UC implements UseCase<${name}ReqDTO, ${name}ResDTO> {
 
-    constructor(private ${entityLC}RG: ${entityCC}Gateway) { }
+    constructor(private ${entityLC}RG: ${entityPC}Gateway) { }
 
-    async execute(req: $entityCC): Promise<${name}ResDTO> {
-        const result = await this.${entityLC}RG...;
+    async execute(req: ${name}ReqDTO): Promise<${name}ResDTO> {
+        const result = await this.${entityLC}RG.();
 
-        return Result.ok<$entityCC>(result);
+        return Result.ok<$entityPC>(result);
     }
 }
 ''';
