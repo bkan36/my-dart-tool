@@ -38,8 +38,8 @@ String useCaseFile(String str, String entity) {
   return '''
 import { Result, UseCase } from "src/core/definition/index";
 import ${entityPC}Gateway from "src/core/gateway/$entityLC.gateway";
-import ${entityPC}InvalidReq from "../error/$entityLC.invalid-request";
 import ${name}ResDTO from "./$str.response-dto";
+import ${name}ReqDTO from "./$str.resquest-dto";
 
 export default class ${name}UC implements UseCase<${name}ReqDTO, ${name}ResDTO> {
 
