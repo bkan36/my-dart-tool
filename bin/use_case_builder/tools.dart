@@ -2,7 +2,7 @@ import '../utils/exports_utils.dart';
 
 String requestFile(String str, String entity) {
   final name = str.toPascalCase();
-  final import = entity.isNotEmpty
+  final import = entity.isEmpty
       ? ''
       : 'import { ${entity.toPascalCase()} } from "src/core/entities";';
 
