@@ -2,14 +2,12 @@ import '../utils/exports_utils.dart';
 
 String requestFile(String str, String entity) {
   final name = str.toPascalCase();
-  final imports = entity.isEmpty ? '' :
-'''
-import { ${entity.toPascalCase()} } from "src/core/entities";
-
-''';
+  final import = entity.isNotEmpty
+      ? ''
+      : 'import { ${entity.toPascalCase()} } from "src/core/entities";';
 
   return '''
-$imports
+$import
 
 type ${name}ReqDTO = { abc: };
 
