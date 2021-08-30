@@ -15,17 +15,14 @@ const foldersName = [
   'core/mock',
   'core/gateway',
   'core/use-cases',
-  'core/erros',
+  'core/errors',
 ];
 
 const filesName = [
-  'core/index.ts',
   'core/entities/index.ts',
-  'core/test/index.ts',
   'core/mock/index.ts',
   'core/gateway/index.ts',
-  'core/use-cases/index.ts',
-  'core/erros/index.ts',
+  'core/errors/index.ts',
 ];
 
 const definitionFiles = {
