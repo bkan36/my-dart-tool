@@ -9,7 +9,7 @@ String requestFile(String str, String entity) {
   return '''
 $import
 
-type ${name}ReqDTO = { abc: };
+type ${name}ReqDTO = $name;
 
 export default ${name}ReqDTO;
 ''';
@@ -39,14 +39,14 @@ String useCaseFile(String str, String entity) {
 import { Result, UseCase } from "src/core/definition/index";
 import ${entityPC}Gateway from "src/core/gateway/$entityLC.gateway";
 import ${name}ResDTO from "./$str.response-dto";
-import ${name}ReqDTO from "./$str.resquest-dto";
+import ${name}ReqDTO from "./$str.request-dto";
 
 export default class ${name}UC implements UseCase<${name}ReqDTO, ${name}ResDTO> {
 
     constructor(private ${entityLC}RG: ${entityPC}Gateway) { }
 
     async execute(req: ${name}ReqDTO): Promise<${name}ResDTO> {
-        const result = await this.${entityLC}RG.();
+        const result = await this.${entityLC}RG.test();
 
         return Result.ok<$entityPC>(result);
     }

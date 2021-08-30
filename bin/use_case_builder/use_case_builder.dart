@@ -5,7 +5,7 @@ void buildUseCaseFiles(String folderName, String ext, String entityName) {
   Directory(folderName).createSync();
 
   for (var f in suffixFileName) {
-    final fileName = '$folderName.$f.$ext';
+    final fileName = f == 'index' ? '$f.$ext' : '$folderName.$f.$ext';
 
     File('$folderName/$fileName')
       ..createSync()
