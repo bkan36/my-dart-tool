@@ -64,6 +64,20 @@ export { default as ${name}ResDTO } from "./$str.response-dto";
 ''';
 }
 
+String testFile(String nameFile) {
+  final name = nameFile.splitByMaj().trim();
+  print(name);
+
+  return '''
+describe('$name tests', () => {
+
+  it('', async () => {});
+
+})
+''';
+}
+
+
 const filesNameMap = {
   'request-dto': requestFile,
   'response-dto': responseFile,
