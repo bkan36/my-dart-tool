@@ -25,7 +25,7 @@ void main(List<String> args) {
   if (args.length == 3 && ext != args[2]) ext = args[2];
 
   buildUseCaseFiles(name, ext, entityName);
-  print(Directory.current);
+
   File('../../test/${args[1].toLowerCase()}/$name.spec.$ext')
     ..createSync()
     ..writeAsStringSync(testFile(name));
