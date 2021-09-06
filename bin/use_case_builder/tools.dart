@@ -46,9 +46,7 @@ export default class ${name}UC implements UseCase<${name}ReqDTO, ${name}ResDTO> 
     constructor(private ${entityLC}RG: ${entityPC}Gateway) { }
 
     async execute(req: ${name}ReqDTO): Promise<${name}ResDTO> {
-        const result = await this.${entityLC}RG.test();
-
-        return Result.ok<$entityPC>(result);
+        return;
     }
 }
 ''';
