@@ -9,7 +9,7 @@ String requestFile(String str, String entity) {
   return '''
 $import
 
-type ${name}ReqDTO = $name;
+type ${name}ReqDTO = $entity;
 
 export default ${name}ReqDTO;
 ''';
