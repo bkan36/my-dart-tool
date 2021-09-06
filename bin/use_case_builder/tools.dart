@@ -67,6 +67,14 @@ export { default as ${name}ResDTO } from "./$str.response-dto";
 String testFile(String nameFile) => '''
 describe('${nameFile.splitByMaj().toLowerCase()} tests', () => {
 
+  beforeAll(() => {
+
+  })
+
+  beforeEach(async () => {
+
+  });
+
   it('', async () => {});
 
 })
