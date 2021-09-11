@@ -2,7 +2,7 @@ import 'dart:io';
 import 'tools.dart';
 
 String dartTestFile(String entity) => '''
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('$entity test', () {
