@@ -1,3 +1,5 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'dart:io';
 import 'tools.dart';
 
@@ -19,19 +21,32 @@ void main() {
 }
 ''';
 
+const fileMap = {
+  '_dto': dtoFile,
+  '_usecase': useCaseFile,
+  'exports': dartExportsfile
+};
+
+const suffixFileName = ['_dto', '_usecase', 'exports'];
+
 void buildUseCaseFiles(String folderName, String entityName) {
+  final pathTestFile =
+      '../../test/${entityName.toLowerCase()}/${folderName}_test.dart';
+
   Directory(folderName).createSync();
 
-  final fileName = '${folderName}_usecase.dart';
+  for (var fileName in suffixFileName) {
 
-  File('$folderName/$fileName')
-    ..createSync()
+  File('$folderName/$folderName$fileName')
+    ..createSync(recursive: true)
     ..writeAsStringSync(useCaseFile(folderName, entityName),
         mode: FileMode.append);
+  }
 
-  File('../../test/${entityName.toLowerCase()}/${folderName}_test.dart')
-    ..createSync()
-    ..writeAsStringSync(dartTestFile(entityName.toLowerCase()));
+  if (!File(pathTestFile).existsSync())
+    File(pathTestFile)
+      ..createSync()
+      ..writeAsStringSync(dartTestFile(entityName.toLowerCase()));
 }
 
 void main(List<String> args) {
