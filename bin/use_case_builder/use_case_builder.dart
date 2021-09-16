@@ -31,17 +31,19 @@ void main(List<String> args) {
     ..createSync(recursive: true)
     ..writeAsStringSync(testFile(name));
 
-  Directory('error').createSync();
+  if (!Directory('error').existsSync()) {
+    Directory('error').createSync();
 
-  File('error/${entityName.toLowerCase()}.invalid-request.ts')
-    ..createSync()
-    ..writeAsStringSync(errorFile(entityName));
+    File('error/${entityName.toLowerCase()}.invalid-request.ts')
+      ..createSync()
+      ..writeAsStringSync(errorFile(entityName));
 
-  File('error/index.ts')
-    ..createSync()
-    ..writeAsStringSync('''
+    File('error/index.ts')
+      ..createSync()
+      ..writeAsStringSync('''
 export { default as ${entityName.toPascalCase()}InvalidReq } from './${entityName.toLowerCase()}.invalid-request';
 ''');
+  }
 
   exit(0);
 }
