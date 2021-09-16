@@ -1,5 +1,17 @@
 import '../utils/exports_utils.dart';
 
+String errorFile(String entity) {
+  return '''
+import { UseCaseError, UseCaseErrorRes } from "src/core/definition";
+
+export default class ${entity}InvalidReq extends UseCaseError {
+    constructor(error: UseCaseErrorRes) {
+        super(error);
+    }
+}
+''';
+}
+
 String requestFile(String str, String entity) {
   final name = str.toPascalCase();
   final import = entity.isEmpty

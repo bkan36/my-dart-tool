@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'tools.dart';
+import '../utils/exports_utils.dart';
 
 void buildUseCaseFiles(String folderName, String ext, String entityName) {
   Directory(folderName).createSync();
@@ -8,7 +9,7 @@ void buildUseCaseFiles(String folderName, String ext, String entityName) {
     final fileName = f == 'index' ? '$f.$ext' : '$folderName.$f.$ext';
 
     File('$folderName/$fileName')
-      ..createSync()
+      ..createSync(recursive: true)
       ..writeAsStringSync(filesNameMap[f]!.call(folderName, entityName),
           mode: FileMode.append);
   }
@@ -27,8 +28,20 @@ void main(List<String> args) {
   buildUseCaseFiles(name, ext, entityName);
 
   File('../../test/${args[1].toLowerCase()}/$name.spec.$ext')
-    ..createSync()
+    ..createSync(recursive: true)
     ..writeAsStringSync(testFile(name));
+
+  Directory('error').createSync();
+
+  File('error/${entityName.toLowerCase()}.invalid-request.ts')
+    ..createSync()
+    ..writeAsStringSync(errorFile(entityName));
+
+  File('error/index.ts')
+    ..createSync()
+    ..writeAsStringSync('''
+export { default as ${entityName.toPascalCase()}InvalidReq } from './${entityName.toLowerCase()}.invalid-request';
+''');
 
   exit(0);
 }
