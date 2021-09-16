@@ -24,31 +24,31 @@ void main() {
 const fileMap = {
   '_dto': dtoFile,
   '_usecase': useCaseFile,
-  'exports': dartExportsfile
+  'exports': dartExportsFile
 };
 
 const suffixFileName = ['_dto', '_usecase', 'exports'];
 
 void buildUseCaseFiles(String folderName, String entityName) {
-  final pathTestFile =
-      '../../test/${entityName.toLowerCase()}/${folderName}_test.dart';
+  // final pathTestFile =
+  //     '../../test/${entityName.toLowerCase()}/${folderName}_test.dart';
 
   Directory(folderName).createSync();
 
   for (var f in suffixFileName) {
-    final fileName = f == 'exports' ? '$f.dart' : '$folderName.$f.dart';
+    final fileName = f == 'exports' ? '$f.dart' : '$folderName$f.dart';
 
     File('$folderName/$fileName')
-      ..createSync(recursive: true)
-      ..writeAsStringSync(fileMap[fileName]!.call(folderName, entityName),
+      ..createSync()
+      ..writeAsStringSync(fileMap[f]!.call(folderName, entityName),
           mode: FileMode.append);
   }
 
-  if (!File(pathTestFile).existsSync())
-    File(pathTestFile)
-      ..createSync()
-      ..writeAsStringSync(dartTestFile(entityName.toLowerCase()),
-          mode: FileMode.append);
+  // if (!File(pathTestFile).existsSync())
+  //   File(pathTestFile)
+  //     ..createSync()
+  //     ..writeAsStringSync(dartTestFile(entityName.toLowerCase()),
+  //         mode: FileMode.append);
 }
 
 void main(List<String> args) {
