@@ -35,18 +35,20 @@ void buildUseCaseFiles(String folderName, String entityName) {
 
   Directory(folderName).createSync();
 
-  for (var fileName in suffixFileName) {
+  for (var f in suffixFileName) {
+    final fileName = f == 'exports' ? '$f.dart' : '$folderName.$f.dart';
 
-  File('$folderName/$folderName$fileName')
-    ..createSync(recursive: true)
-    ..writeAsStringSync(useCaseFile(folderName, entityName),
-        mode: FileMode.append);
+    File('$folderName/$fileName')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(fileMap[fileName]!.call(folderName, entityName),
+          mode: FileMode.append);
   }
 
   if (!File(pathTestFile).existsSync())
     File(pathTestFile)
       ..createSync()
-      ..writeAsStringSync(dartTestFile(entityName.toLowerCase()));
+      ..writeAsStringSync(dartTestFile(entityName.toLowerCase()),
+          mode: FileMode.append);
 }
 
 void main(List<String> args) {
