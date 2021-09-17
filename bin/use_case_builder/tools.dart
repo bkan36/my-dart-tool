@@ -34,6 +34,7 @@ String responseFile(String str, String entity) {
 
   return '''
 import { Result } from "src/core/definition";
+import { $entityPC } from "src/core/entities";
 import ${entityPC}InvalidReq from "../error/$entityLC.invalid-request";
 
 type ${name}ResDTO = Result<$entityPC, ${entityPC}InvalidReq>;
