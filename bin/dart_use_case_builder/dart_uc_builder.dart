@@ -31,7 +31,7 @@ const suffixFileName = ['_dto', '_usecase', 'exports'];
 
 void buildUseCaseFiles(String folderName, String entityName) {
   final pathTestFile =
-      '../../test/${entityName.toLowerCase()}/${folderName}_test.dart';
+      '../../../../test/unit/${entityName.toLowerCase()}/${folderName}_test.dart';
 
   Directory(folderName).createSync();
 
@@ -44,11 +44,12 @@ void buildUseCaseFiles(String folderName, String entityName) {
           mode: FileMode.append);
   }
 
-  if (!File(pathTestFile).existsSync())
+  if (!File(pathTestFile).existsSync()) {
     File(pathTestFile)
       ..createSync()
       ..writeAsStringSync(dartTestFile(entityName.toLowerCase()),
           mode: FileMode.append);
+  }
 }
 
 void main(List<String> args) {

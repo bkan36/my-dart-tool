@@ -9,13 +9,14 @@ String useCaseFile(String str, String entity) {
 import 'package:admin/core/definition/exports.dart';
 import 'package:admin/core/definition/use_case.dart';
 import 'package:admin/core/gateway/${entityLC}_gateway.dart';
+import './${str}_dto.dart';
 
 class ${name}UC implements UseCase<${name}DTO, Result> {
 
     ${name}UC(${entityPC}Gateway ${entityLC}RG);
 
     Future<Result> call(${name}DTO payload) async {
-        return;
+        return Result.success(null);
     }
 }
 ''';
