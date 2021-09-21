@@ -12,8 +12,9 @@ import 'package:admin/core/gateway/${entityLC}_gateway.dart';
 import './${str}_dto.dart';
 
 class ${name}UC implements UseCase<${name}DTO, Result> {
+    final ${entityPC}Gateway ${entityLC}RG;
 
-    ${name}UC(${entityPC}Gateway ${entityLC}RG);
+    ${name}UC(this.${entityLC}RG);
 
     Future<Result> call(${name}DTO payload) async {
         return Result.success(null);
