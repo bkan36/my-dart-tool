@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'tools.dart';
 
-String dartTestFile(String entity) => '''
+String dartTestFile(String name, String entity) => '''
 import 'package:test/test.dart';
 
 void main() {
@@ -13,7 +13,7 @@ void main() {
 
     });
   
-    test('first test', () async {
+    test('should ${name.replaceAll('_', ' ')}', () async {
 
     });
   
@@ -47,7 +47,7 @@ void buildUseCaseFiles(String folderName, String entityName) {
   if (!File(pathTestFile).existsSync()) {
     File(pathTestFile)
       ..createSync()
-      ..writeAsStringSync(dartTestFile(entityName.toLowerCase()),
+      ..writeAsStringSync(dartTestFile(folderName, entityName.toLowerCase()),
           mode: FileMode.append);
   }
 }
