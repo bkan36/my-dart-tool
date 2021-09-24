@@ -12,10 +12,11 @@ import 'package:admin/core/gateway/${entityLC}_gateway.dart';
 import './${str}_dto.dart';
 
 class ${name}UC implements UseCase<${name}DTO, Result> {
-    final ${entityPC}Gateway ${entityLC}RG;
+    final ${entityPC}Gateway _${entityLC}RG;
 
-    ${name}UC(this.${entityLC}RG);
+    ${name}UC(this._${entityLC}RG);
 
+    @override
     Future<Result> call(${name}DTO payload) async {
         return Result.success(null);
     }
@@ -31,9 +32,9 @@ String dtoFile(String str, String entity) {
 import 'package:admin/core/entities/$entityLC.dart';
 
 class ${className}DTO {
-  final $entity $entityLC;
+  final $entity _$entityLC;
 
-  ${className}DTO(this.$entityLC);
+  ${className}DTO(this._$entityLC);
 }
 ''';
 }

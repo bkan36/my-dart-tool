@@ -7,7 +7,7 @@ String dartTestFile(String name, String entity) => '''
 import 'package:test/test.dart';
 
 void main() {
-  group('$entity test', () {
+  group('${name.replaceAll('_', ' ')} test', () {
 
     setUpAll(() {
 
