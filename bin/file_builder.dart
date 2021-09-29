@@ -30,8 +30,7 @@ void main(List<String> args) {
     if (fn != '_view') {
       File(pathFile).writeAsStringSync('''
 class $className {
-  static final $className _singleton =
-    $className._privateConstructor();
+  static final $className _singleton = $className._privateConstructor();
   factory $className() => _singleton;
   $className._privateConstructor();
 }

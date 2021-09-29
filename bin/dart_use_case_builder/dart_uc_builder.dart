@@ -3,8 +3,13 @@
 import 'dart:io';
 import 'tools.dart';
 
-String dartTestFile(String name, String entity) => '''
-import 'package:test/test.dart';
+String dartTestFile(String name, String entity, bool isFlutterTestFile) {
+  var importPath = isFlutterTestFile
+      ? 'package:flutter_test/flutter_test.dart'
+      : 'package:test/test.dart';
+
+  return '''
+import $importPath;
 
 void main() {
   group('${name.replaceAll('_', ' ')} test', () {
@@ -20,6 +25,7 @@ void main() {
   });
 }
 ''';
+}
 
 const fileMap = {
   '_dto': dtoFile,
@@ -29,9 +35,11 @@ const fileMap = {
 
 const suffixFileName = ['_dto', '_usecase', 'exports'];
 
-void buildUseCaseFiles(String folderName, String entityName) {
-  final pathTestFile =
-      '../../../../test/unit/${entityName.toLowerCase()}/${folderName}_test.dart';
+void buildUseCaseFiles(
+    String folderName, String entityName, bool isFlutterTestFile) {
+  final pathTestFile = isFlutterTestFile
+      ? '../../../../test/unit/${entityName.toLowerCase()}/${folderName}_test.dart'
+      : '../../../../test/unit/${entityName.toLowerCase()}/${folderName}_test.dart';
 
   Directory(folderName).createSync();
 
@@ -46,8 +54,9 @@ void buildUseCaseFiles(String folderName, String entityName) {
 
   if (!File(pathTestFile).existsSync()) {
     File(pathTestFile)
-      ..createSync()
-      ..writeAsStringSync(dartTestFile(folderName, entityName.toLowerCase()),
+      ..createSync(recursive: true)
+      ..writeAsStringSync(
+          dartTestFile(folderName, entityName.toLowerCase(), isFlutterTestFile),
           mode: FileMode.append);
   }
 }
@@ -55,12 +64,14 @@ void buildUseCaseFiles(String folderName, String entityName) {
 void main(List<String> args) {
   if (args.isEmpty) exit(1);
   var entityName = '';
+  var isFlutterTestFile = false;
 
   final name = args[0];
 
-  if (args.length == 2) entityName = args[1];
+  if (args.length == 3) isFlutterTestFile = true;
+  if (args.length > 1) entityName = args[1];
 
-  buildUseCaseFiles(name, entityName);
+  buildUseCaseFiles(name, entityName, isFlutterTestFile);
 
   exit(0);
 }
