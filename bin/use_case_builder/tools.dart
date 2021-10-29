@@ -78,16 +78,18 @@ export { default as ${name}ResDTO } from "./$str.response-dto";
 
 String testFile(String nameFile) => '''
 describe('${nameFile.splitByMaj().toLowerCase()} tests', () => {
-
-  beforeAll(() => {
-
-  })
+  let gatewayA: InMem;
+  let gatewayB: InMemB;
+  let usecaseName: UseCaseName;
 
   beforeEach(async () => {
+      gatewayA = InMem();
+      gatewayB = InMemB();
 
+      usecaseName = UseCaseName(gatewayA, gatewayB);
   });
 
-  it('should ${nameFile.splitByMaj().toLowerCase()} tests', async () => {
+  it('should ${nameFile.splitByMaj().toLowerCase()}', async () => {
     
   });
 

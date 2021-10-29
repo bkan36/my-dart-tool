@@ -11,16 +11,15 @@ void main(List<String> args) {
 
   final file = '$fileName.$ext';
 
-  var className = fileName.toPascalCase();
+  var className = fileName.snakeCaseToPascalCase();
 
-  File(file).createSync();
-
-  File(file).writeAsStringSync('''
+  File(file)
+    ..createSync()
+    ..writeAsStringSync('''
 class $className {
-  static final $className _singleton =
-    $className._privateConstructor();
-  factory $className() => _singleton;
   $className._privateConstructor();
+  factory $className() => _singleton;
+  static final $className _singleton = $className._privateConstructor();
 }
 ''');
   exit(0);
