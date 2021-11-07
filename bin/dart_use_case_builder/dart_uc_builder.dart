@@ -9,7 +9,7 @@ String dartTestFile(String name, String entity, bool isFlutterTestFile) {
       : 'package:test/test.dart';
 
   return '''
-import $importPath;
+import '$importPath';
 
 void main() {
   group('${name.replaceAll('_', ' ')} test', () {
