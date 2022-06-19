@@ -156,7 +156,7 @@ const preFilledFiles = {
 void main(List<String> args) {
   if (args.isEmpty) exit(1);
   final fileName = args[0];
-  
+
   try {
     folders.forEach((folderName) =>
         File('${folderName}s/$fileName.$folderName.ts')
@@ -186,12 +186,31 @@ void main(List<String> args) {
 
     final buffer = File('utils/constants.ts').readAsStringSync();
 
-    final lastIdx = buffer.lastIndexOf('MODEL\'');
+    int lastIdx;
+
+    // constant.ts
+
+    lastIdx = buffer.lastIndexOf('MODEL\'');
 
     final newBuffer = buffer.replaceRange(lastIdx + 'MODEL\''.length,
         lastIdx + 'MODEL\''.length + 1, newConstant);
 
     File('utils/constants.ts').writeAsStringSync(newBuffer);
+
+    // app.module.ts
+
+    final addModuleImport = '\n${fileName.toPascalCase()}Module,\n';
+
+    final appModuleBuffer = File('app.module.ts').readAsStringSync();
+
+    lastIdx = appModuleBuffer.lastIndexOf('Module,');
+
+    final newAppModuleBuffer = appModuleBuffer.replaceRange(
+        lastIdx + 'Module,'.length,
+        lastIdx + 'Module,'.length + 1,
+        addModuleImport);
+
+    File('app.module.ts').writeAsStringSync(newAppModuleBuffer);
   } catch (e) {
     print(e);
   }
