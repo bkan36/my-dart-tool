@@ -8,7 +8,7 @@ const foldersName = [
   'presentation/features',
   'domain',
   'domain/definition',
-  'domain/repositories',
+  'domain/gateway',
   'domain/use-cases',
   'data',
   'data/models',
@@ -16,7 +16,6 @@ const foldersName = [
   'data/repositories',
   'data/repositories/remote',
   'data/repositories/local',
-  'data/repositories/mock',
 ];
 
 const filesName = [

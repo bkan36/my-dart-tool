@@ -53,7 +53,7 @@ const dartDefinitionFiles = {
 };
 
 void main(List<String?> args) {
-  var exportFileName = args.isEmpty ? tsExportFiles : dartExportFiles;
+  var exportFileName = args[0] == 'ts' ? tsExportFiles : dartExportFiles;
   var dfiles = args.isEmpty ? definitionFiles : dartDefinitionFiles;
 
   foldersName.forEach((folder) => Directory(folder).createSync());
