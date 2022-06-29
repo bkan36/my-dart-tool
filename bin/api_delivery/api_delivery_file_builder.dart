@@ -83,7 +83,7 @@ import { Update${nameToPascalCase}Dto } from './dto/$nameToLowerCase/update$name
 
 import { $nameToPascalCase } from '../interfaces/$nameToLowerCase.interface'
 
-import { ADDRESS_MODEL } from '../utils/constants'
+import { ${name.toUpperCase()}_MODEL } from '../utils/constants'
 
 import { Model } from 'mongoose'
 
@@ -212,6 +212,6 @@ void main(List<String> args) {
 
     File('app.module.ts').writeAsStringSync(newAppModuleBuffer);
   } catch (e) {
-    print(e);
+    print('ERROR: ' + e.toString());
   }
 }
