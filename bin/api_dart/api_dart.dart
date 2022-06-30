@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'models/controller_model.dart';
+import 'models/gateway_model.dart';
 import 'models/repository_model.dart';
 import 'models/route_model.dart';
 
@@ -25,6 +26,10 @@ void main(List<String> args) {
         '$path/${fileName.toLowerCase()}_$name.dart')
       ..createSync()
       ..writeAsStringSync(models[name]!.call(fileName), mode: FileMode.append));
+
+    File('core/gateway/${fileName}_gateway.dart')
+      ..createSync()
+      ..writeAsStringSync(gatewayModel(fileName));
   } catch (e) {
     throw Exception();
   }
