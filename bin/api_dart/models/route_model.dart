@@ -14,7 +14,7 @@ ${nameToLowerCase}Routes(Alfred app) {
 
   // Add $nameToLowerCase
   app.post('/$nameToLowerCase',
-      (req, res) async => ${nameToLowerCase}Controller.new$nameToPascalCase(await req.bodyAsJsonMap));
+      (req, res) async => ${nameToLowerCase}Controller.new$nameToPascalCase(await req.bodyAsJsonMap),);
 
   // Edit $nameToLowerCase
   app.put(
@@ -22,18 +22,18 @@ ${nameToLowerCase}Routes(Alfred app) {
       (req, res) async => ${nameToLowerCase}Controller.edit$nameToPascalCase(
             req.uri.queryParameters['id'],
             await req.bodyAsJsonMap,
-          ));
+          ),);
 
   // FindOne $nameToLowerCase
   app.get('/$nameToLowerCase',
       (req, res) => ${nameToLowerCase}Controller.getOne(req.uri.queryParameters['id']));
 
   // FindAll $nameToLowerCase
-  app.get('/${nameToLowerCase}s', (req, res) => ${nameToLowerCase}Controller.getAll());
+  app.get('/${nameToLowerCase}s', (req, res) => ${nameToLowerCase}Controller.getAll(),);
 
   // Delete $nameToLowerCase
   app.delete('/$nameToLowerCase',
-      (req, res) => ${nameToLowerCase}Controller.delete(req.uri.queryParameters['id']));
+      (req, res) => ${nameToLowerCase}Controller.delete(req.uri.queryParameters['id']),);
 }
 ''';
 }
