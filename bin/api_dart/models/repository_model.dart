@@ -25,27 +25,27 @@ class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
 
   Future<Map<String, dynamic>?> getOne(String id) async => await collection
       .modernFindOne(selector: where.id(ObjectId.parse(id)))
-      .catchError((e) => throw AlfredException(404, 'CARD NOT FOUND'));
+      .catchError((e) => throw AlfredException(404, '${name.toUpperCase()} NOT FOUND'));
 
   @override
   Future<String?> save(Map<String, dynamic> $nameToLowerCase) => collection
       .insertOne($nameToLowerCase)
       .then((res) => res.id.toString().substring(10, 34))
-      .catchError((err) => throw AlfredException(500, 'CARD INSERTION FAILED'));
+      .catchError((err) => throw AlfredException(500, '${name.toUpperCase()} INSERTION FAILED'));
 
   @override
   Future<Map<String, dynamic>?> update(
       String id, Map<String, dynamic> $nameToLowerCase) async {
     Map<String, dynamic>? ${nameToLowerCase}ToUpdate = await getOne(id);
 
-    if (${nameToLowerCase}ToUpdate == null) throw AlfredException(404, 'CARD NOT FOUND');
+    if (${nameToLowerCase}ToUpdate == null) throw AlfredException(404, '${name.toUpperCase()} NOT FOUND');
 
     $nameToLowerCase.forEach((key, value) => ${nameToLowerCase}ToUpdate[key] = $nameToLowerCase[key]);
 
     return collection
         .modernUpdate(where.id(${nameToLowerCase}ToUpdate['_id']), ${nameToLowerCase}ToUpdate)
         .catchError(
-            (err) => throw AlfredException(500, 'CARD UPDATE FAILED'));
+            (err) => throw AlfredException(500, '${name.toUpperCase()} UPDATE FAILED'));
   }
 
   Future<List<Map<String, dynamic>>> getAll() async {
