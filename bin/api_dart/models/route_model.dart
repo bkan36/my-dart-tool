@@ -14,7 +14,9 @@ ${nameToLowerCase}Routes(Alfred app) {
 
   // Add $nameToLowerCase
   app.post('/$nameToLowerCase',
-      (req, res) async => ${nameToLowerCase}Controller.new$nameToPascalCase(await req.bodyAsJsonMap),);
+      (req, res) async => ${nameToLowerCase}Controller.new$nameToPascalCase(await req.bodyAsJsonMap),
+      middleware: [],
+      );
 
   // Edit $nameToLowerCase
   app.put(
