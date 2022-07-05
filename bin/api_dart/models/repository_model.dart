@@ -11,7 +11,7 @@ import 'package:bb_admin_alfred/core/gateway/${nameToLowerCase}_gateway.dart';
 
 import '../mongo_service.dart';
 
-final adminRepo = ${nameToPascalCase}Repository();
+final ${nameToLowerCase}Repo = ${nameToPascalCase}Repository();
 
 const collectionName = '$nameToLowerCase';
 
