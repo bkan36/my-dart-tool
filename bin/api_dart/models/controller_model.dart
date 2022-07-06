@@ -36,7 +36,7 @@ class ${nameToPascalCase}Controller {
     return await this
         .${nameToLowerCase}Repository
         .update(id ?? '', edit${nameToPascalCase}Dto['$nameToLowerCase'])
-        .then(($nameToLowerCase) => {'$nameToLowerCase': $nameToLowerCase, 'message': '$nameToLowerCase successfuly edited'});
+        .then(($nameToLowerCase) => {'message': '$nameToLowerCase successfuly edited'});
   }
 
   FutureListMap getAll() async => await this.${nameToLowerCase}Repository.getAll();
