@@ -5,11 +5,16 @@ String repositoryModel(String name) {
   final nameToPascalCase = name.toPascalCase();
 
   return '''import 'package:alfred/alfred.dart';
+import 'dart:io';
+
+import 'package:alfred/alfred.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 import 'package:bb_admin_alfred/core/gateway/${nameToLowerCase}_gateway.dart';
 
+import '../../utils/http_errors_messages.dart';
 import '../mongo_service.dart';
+import 'typdefs.dart';
 
 final ${nameToLowerCase}Repo = ${nameToPascalCase}Repository();
 
@@ -23,7 +28,7 @@ class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
 
   final collection = MongoService().collection(collectionName);
 
-  Future<Map<String, dynamic>?> getOne(String id) async => await collection
+  FutureMapDynamic getOne(String id) async => await collection
       .modernFindOne(selector: where.id(ObjectId.parse(id)))
       .catchError((e) => throw AlfredException(HttpStatus.notFound, notFound('${name.toUpperCase()}')));
 
@@ -34,7 +39,7 @@ class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
       .catchError((err) => throw AlfredException(HttpStatus.internalServerError, insertionFailed('${name.toUpperCase()}')));
 
   @override
-  Future<Map<String, dynamic>?> update(
+  FutureMapDynamic update(
       String id, Map<String, dynamic> $nameToLowerCase) async {
     Map<String, dynamic>? ${nameToLowerCase}ToUpdate = await getOne(id);
 
@@ -48,7 +53,7 @@ class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
             (err) => throw AlfredException(HttpStatus.internalServerError, updatingFailed('${name.toUpperCase()}')));
   }
 
-  Future<List<Map<String, dynamic>>> getAll() async {
+  FutureListMapDynamic getAll() async {
     return await this.collection.find().toList();
   }
 
