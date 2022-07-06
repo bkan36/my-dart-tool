@@ -4,7 +4,7 @@ String repositoryModel(String name) {
   final nameToLowerCase = name.toLowerCase();
   final nameToPascalCase = name.toPascalCase();
 
-  return '''import 'package:alfred/alfred.dart';
+  return '''
 import 'dart:io';
 
 import 'package:alfred/alfred.dart';
