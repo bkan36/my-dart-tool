@@ -7,7 +7,7 @@ import 'models/route_model.dart';
 
 const paths = {
   'controllers': 'controller',
-  'db/repositories': 'repository',
+  'database/repositories': 'repository',
   'routes': 'routes',
 };
 
@@ -31,6 +31,6 @@ void main(List<String> args) {
       ..createSync()
       ..writeAsStringSync(gatewayModel(fileName));
   } catch (e) {
-    throw Exception();
+    throw Exception(e);
   }
 }

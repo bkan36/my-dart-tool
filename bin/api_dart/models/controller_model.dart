@@ -7,7 +7,7 @@ String controllerModel(String name) {
   return '''
 import 'package:alfred/alfred.dart';
 
-import 'package:bb_admin_alfred/db/repositories/${nameToLowerCase}_repository.dart';
+import 'package:bb_admin_alfred/database/repositories/${nameToLowerCase}_repository.dart';
 
 typedef FutureMap = Future<Map<String, Object?>>;
 typedef FutureListMap = Future<List<Map<String, Object?>>>;
