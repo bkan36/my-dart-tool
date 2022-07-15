@@ -9,9 +9,9 @@ import 'package:alfred/alfred.dart';
 
 import '../controllers/${nameToLowerCase}_controller.dart';
 
-${nameToLowerCase}Routes(Alfred app) {
-  final ${nameToLowerCase}Controller = ${nameToPascalCase}Controller();
+final ${nameToLowerCase}Controller = ${nameToPascalCase}Controller();
 
+${nameToLowerCase}Routes(Alfred app) {
   // Add $nameToLowerCase
   app.post('/$nameToLowerCase',
       (req, res) async => ${nameToLowerCase}Controller.new$nameToPascalCase(await req.bodyAsJsonMap),

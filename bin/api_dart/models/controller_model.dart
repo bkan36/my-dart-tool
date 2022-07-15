@@ -13,9 +13,7 @@ typedef FutureMap = Future<Map<String, Object?>>;
 typedef FutureListMap = Future<List<Map<String, Object?>>>;
 
 class ${nameToPascalCase}Controller {
-  ${nameToPascalCase}Controller._privateConstructor() {
-    this.${nameToLowerCase}Repository = ${nameToPascalCase}Repository();
-  }
+  ${nameToPascalCase}Controller._privateConstructor() : this.${nameToLowerCase}Repository = ${nameToPascalCase}Repository();
   factory ${nameToPascalCase}Controller() => _singleton;
   static final ${nameToPascalCase}Controller _singleton = ${nameToPascalCase}Controller._privateConstructor();
 
