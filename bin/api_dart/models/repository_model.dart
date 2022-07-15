@@ -53,13 +53,10 @@ class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
             (err) => throw AlfredException(HttpStatus.internalServerError, updatingFailed('${name.toUpperCase()}')));
   }
 
-  FutureListMapDynamic getAll() async {
-    return await this.collection.find().toList();
-  }
+  FutureListMapDynamic getAll() async => await collection.find().toList();
 
   @override
-  Future<bool> delete(String id) async => await this
-      .collection
+  Future<bool> delete(String id) async => await collection
       .deleteOne(where.id(ObjectId.parse(id)))
       .then((response) => response.nRemoved == 1 ? true : false);
 }''';
