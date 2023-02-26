@@ -16,6 +16,8 @@ void main(List<String> args) {
   File(file)
     ..createSync()
     ..writeAsStringSync('''
+final ${className.pascalCaseToCamelCase()} = $className();
+
 class $className {
   $className._privateConstructor();
   factory $className() => _singleton;

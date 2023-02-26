@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'utils/exports_utils.dart';
+
 void main(List<String> args) {
   if (args.isEmpty) exit(1);
-  
+
   final relativePath = '${args[0]}';
   var ext = 'dart';
 
@@ -29,6 +30,8 @@ void main(List<String> args) {
 
     if (fn != '_view') {
       File(pathFile).writeAsStringSync('''
+final ${className.pascalCaseToCamelCase()} = $className();
+
 class $className {
   static final $className _singleton = $className._privateConstructor();
   factory $className() => _singleton;

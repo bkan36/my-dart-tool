@@ -14,28 +14,29 @@ import 'package:bb_admin_alfred/core/gateway/${nameToLowerCase}_gateway.dart';
 
 import '../../utils/http_errors_messages.dart';
 import '../mongo_service.dart';
+import 'repository.dart';
 import 'typdefs.dart';
 
 final ${nameToLowerCase}Repo = ${nameToPascalCase}Repository();
 
 const collectionName = '$nameToLowerCase';
 
-class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
-  ${nameToPascalCase}Repository._();
+class ${nameToPascalCase}Repository extends Repository implements ${nameToPascalCase}Gateway {
+  ${nameToPascalCase}Repository._(): super(collectionName: collectionName, entityName: '${name.toUpperCase()}');
 
   static final ${nameToPascalCase}Repository _singleton = ${nameToPascalCase}Repository._();
   factory ${nameToPascalCase}Repository() => _singleton;
 
-  final collection = MongoService().collection(collectionName);
+  FutureListMapDynamic getAll() async => await collection.find().toList();
 
   FutureMapDynamic getOne(String id) async => await collection
       .modernFindOne(selector: where.id(ObjectId.parse(id)))
       .catchError((e) => throw AlfredException(HttpStatus.notFound, notFound('${name.toUpperCase()}')));
 
   @override
-  Future<String?> save(Map<String, dynamic> $nameToLowerCase) => collection
+  Future<String> save(Map<String, dynamic> $nameToLowerCase) => collection
       .insertOne($nameToLowerCase)
-      .then((res) => res.id.toString().substring(10, 34))
+      .then((res) => (res.id as ObjectId).\$oid)
       .catchError((err) => throw AlfredException(HttpStatus.internalServerError, insertionFailed('${name.toUpperCase()}')));
 
   @override
@@ -52,8 +53,6 @@ class ${nameToPascalCase}Repository implements ${nameToPascalCase}Gateway {
         .catchError(
             (err) => throw AlfredException(HttpStatus.internalServerError, updatingFailed('${name.toUpperCase()}')));
   }
-
-  FutureListMapDynamic getAll() async => await collection.find().toList();
 
   @override
   Future<bool> delete(String id) async => await collection
