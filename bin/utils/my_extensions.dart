@@ -5,5 +5,5 @@ extension MyExtension on String {
       splitByMaj().split('_').map((e) => e = e.toPascalCase()).join();
   String snakeCaseToCamelCase() =>
       snakeCaseToPascalCase().replaceRange(0, 1, this[0]);
-  String pascalCaseToCamelCase() => replaceRange(0, 1, this[0]);
+  String pascalCaseToCamelCase() => replaceRange(0, 1, this[0].toLowerCase());
 }
