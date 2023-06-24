@@ -6,22 +6,15 @@ const foldersName = [
   'presentation/widgets/custom',
   'presentation/core',
   'presentation/features',
-  'domain',
-  'domain/definition',
-  'domain/gateway',
-  'domain/use-cases',
   'data',
   'data/models',
-  'data/config',
-  'data/repositories',
-  'data/repositories/remote',
-  'data/repositories/local',
+  'data/services',
+  'data/utils',
 ];
 
 const filesName = [
   'presentation/presentation.dart',
   'data/data.dart',
-  'domain/domain.dart',
 ];
 
 void main(List<String> args) {
