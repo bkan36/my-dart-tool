@@ -28,8 +28,9 @@ void main(List<String> args) {
     nameDir.split('_').forEach((n) => className += n.toPascalCase());
     className += fn.substring(1).toPascalCase();
 
-    if (fn != '_view') {
-      File(pathFile).writeAsStringSync('''
+    switch (fn) {
+      case '_view':
+        File(pathFile).writeAsStringSync('''
 final ${className.pascalCaseToCamelCase()} = $className();
 
 class $className {
@@ -38,8 +39,18 @@ class $className {
   $className._privateConstructor();
 }
 ''');
-    } else {
-      File(pathFile).writeAsStringSync('''
+      case '_controller':
+        File(pathFile).writeAsStringSync('''
+final ${className.pascalCaseToCamelCase().replaceFirst('Controller', 'Ctrler')} = $className();
+
+class $className {
+  static final $className _singleton = $className._privateConstructor();
+  factory $className() => _singleton;
+  $className._privateConstructor();
+}
+''');
+      default:
+        File(pathFile).writeAsStringSync('''
 import 'package:flutter/material.dart';
 
 class $className extends StatelessWidget {
@@ -52,6 +63,31 @@ class $className extends StatelessWidget {
 }
         ''');
     }
+
+//     if (fn != '_view') {
+//       File(pathFile).writeAsStringSync('''
+// final ${className.pascalCaseToCamelCase()} = $className();
+
+// class $className {
+//   static final $className _singleton = $className._privateConstructor();
+//   factory $className() => _singleton;
+//   $className._privateConstructor();
+// }
+// ''');
+//     } else {
+//       File(pathFile).writeAsStringSync('''
+// import 'package:flutter/material.dart';
+
+// class $className extends StatelessWidget {
+//   const $className({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+//         ''');
+//     }
   });
   exit(0);
 }
